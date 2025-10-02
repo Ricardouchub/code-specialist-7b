@@ -12,7 +12,7 @@ Este modelo es un fine-tuning de `mistralai/Mistral-7B-Instruct-v0.3` especializ
 
 El repositorio contiene el modelo final fusionado (merged) y está listo para ser usado directamente para inferencia.
 
-**Repositorio:** [**Ricardouchub/code-specialist-7b**](https://huggingface.co/Ricardouchub/code-specialist-7b)
+[**Huggingface: Code-Specialist-7b**](https://huggingface.co/Ricardouchub/code-specialist-7b)
 
 ```python
 import torch
@@ -80,28 +80,3 @@ El modelo fue entrenado utilizando la técnica de QLoRA, cargando el modelo base
 ### 4. Evaluación
 Se planeó una evaluación cuantitativa utilizando el benchmark estándar `HumanEval`. No obstante, se descubrió que la librería oficial del benchmark no era compatible con Windows. Como alternativa, se implementó un benchmark local con 25 tareas de programación y un sistema de "evaluación humana" para comparar las respuestas del modelo base y del modelo afinado de forma cualitativa, probando la mejora en la calidad, precisión y formato del código generado.
 
-## Instalación y Ejecución de la App Local
-
-Para ejecutar la interfaz de chat de Streamlit en su máquina.
-
-### 1. Requisitos
--   Python 3.10+
--   Conda o venv
--   Una GPU NVIDIA con soporte para CUDA y al menos 12GB de VRAM
-
-### 2. Instalación
-Clone el repositorio, cree y active un entorno, e instale las dependencias.
-
-```bash
-git clone [https://github.com/Ricardouchub/code-specialist-7b.git](https://github.com/Ricardouchub/code-specialist-7b.git)
-cd code-specialist-7b
-conda create -n codespecialist python=3.10
-conda activate codespecialist
-pip install -r requirements.txt
-```
-
-### 3. Ejecución
-
-```Bash
-streamlit run app.py
-```

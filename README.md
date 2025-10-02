@@ -14,43 +14,52 @@ El repositorio contiene el modelo final fusionado (merged) y está listo para se
 
 **Repositorio:** [**Ricardouchub/code-specialist-7b**](https://huggingface.co/Ricardouchub/code-specialist-7b)
 
-### Ejemplo de Carga y Uso
-
-Para utilizar este modelo, simplemente cárgalo desde el repositorio del Hub. El siguiente código lo cargará en 4-bits para optimizar el uso de VRAM.
-
 ```python
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 
-# ID del repositorio de tu modelo en Hugging Face
-repo_id = "Ricardouchub/code-specialist-7b"
+# ID del repositorio en Hugging Face. No se necesita clonar manualmente.
+model_id = "Ricardouchub/code-specialist-7b"
+
+print(f"Cargando el modelo '{model_id}' desde Hugging Face Hub...")
 
 # Configuración de cuantización para cargar en 4-bits
+# Esto permite que se ejecute en GPUs con menos VRAM.
 bnb_config = BitsAndBytesConfig(
     load_in_4bit=True,
     bnb_4bit_quant_type="nf4",
     bnb_4bit_compute_dtype=torch.bfloat16
 )
 
-# Cargar el modelo afinado directamente
+# `from_pretrained` descarga y guarda en caché el modelo automáticamente
 model = AutoModelForCausalLM.from_pretrained(
-    repo_id,
+    model_id,
     quantization_config=bnb_config,
-    device_map="auto"
+    device_map="auto" # Usa la GPU si está disponible
 )
 
-# Cargar el tokenizador
-tokenizer = AutoTokenizer.from_pretrained(repo_id)
+# El tokenizador también se descarga desde el Hub
+tokenizer = AutoTokenizer.from_pretrained(model_id)
 
-print("¡Modelo Code Specialist 7B cargado con éxito!")
+print("\n¡Modelo listo para la inferencia!")
 
-# Inferencia
-pregunta = "Escribe una función en Python que use pandas para agrupar un DataFrame por una columna y calcular la media de otra."
+# --- Inferencia de Ejemplo ---
+pregunta = "Implementa una función en Python para calcular el factorial de un número usando recursividad."
 prompt = f"[INST] {pregunta} [/INST]"
 
-inputs = tokenizer(prompt, return_tensors="pt").to("cuda")
+# Tokenizar la entrada
+inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
+
+# Generar la respuesta
 outputs = model.generate(**inputs, max_new_tokens=256)
-print(tokenizer.decode(outputs[0], skip_special_tokens=True))
+
+# Decodificar y mostrar la respuesta
+respuesta_generada = tokenizer.decode(outputs[0], skip_special_tokens=True)
+
+print("\n--- PREGUNTA ---")
+print(pregunta)
+print("\n--- RESPUESTA DEL MODELO ---")
+print(respuesta_generada.split("[/INST]")[-1].strip())
 ```
 
 ## Proceso de Desarrollo del Modelo

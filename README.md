@@ -4,8 +4,6 @@ Esta es una aplicación de chat local construida con Streamlit para interactuar 
 
 Este modelo es un fine-tuning de `mistralai/Mistral-7B-Instruct-v0.3` especializado en la generación de código Python y SQL, con un enfoque en tareas de ciencia y análisis de datos.
 
-## Sobre el Modelo
-
 -   **Modelo Base:** `mistralai/Mistral-7B-Instruct-v0.3`
 -   **Técnica de Fine-Tuning:** Supervised Fine-Tuning (SFT) utilizando adaptadores LoRA.
 -   **Dataset:** Entrenado sobre un subconjunto filtrado de aproximadamente 79,000 ejemplos de los datasets `sahil2801/CodeAlpaca-20k` y `TokenBender/code_instructions_122k_alpaca_style`.
@@ -86,8 +84,8 @@ Para ejecutar la interfaz de chat de Streamlit en su máquina.
 Clone el repositorio, cree y active un entorno, e instale las dependencias.
 
 ```bash
-git clone [https://github.com/TuUsuario/Tu-Repositorio.git](https://github.com/TuUsuario/Tu-Repositorio.git)
-cd Tu-Repositorio
+git clone [https://github.com/Ricardouchub/code-specialist-7b.git](https://github.com/Ricardouchub/code-specialist-7b.git)
+cd code-specialist-7b
 conda create -n codespecialist python=3.10
 conda activate codespecialist
 pip install -r requirements.txt

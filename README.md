@@ -1,5 +1,30 @@
 # Code Specialist 7B
 
+<p align="left">
+  <!-- Estado -->
+  <img src="https://img.shields.io/badge/Estado-Operativo-2ECC71?style=flat-square&logo=checkmarx&logoColor=white" alt="Estado: Operativo"/>
+
+  <!-- Lenguaje -->
+  <img src="https://img.shields.io/badge/Python-3.11-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.11"/>
+
+  <!-- Modelo -->
+  <img src="https://img.shields.io/badge/Mistral-7B--Instruct-FF6F00?style=flat-square&logo=huggingface&logoColor=white" alt="Mistral-7B"/>
+
+  <!-- Técnica -->
+  <img src="https://img.shields.io/badge/QLoRA-Fine--Tuning-800080?style=flat-square" alt="QLoRA Fine-Tuning"/>
+
+  <!-- Librerías -->
+  <img src="https://img.shields.io/badge/Transformers-4.56.2-FFAE1A?style=flat-square&logo=huggingface&logoColor=white" alt="Transformers"/>
+  <!-- App -->
+  <img src="https://img.shields.io/badge/Streamlit-App-FF4B4B?style=flat-square&logo=streamlit&logoColor=white" alt="Streamlit"/>
+
+  <!-- Hugging Face -->
+  <a href="https://huggingface.co/Ricardouchub/code-specialist-7b">
+    <img src="https://img.shields.io/badge/HuggingFace-Repo-FFD21E?style=flat-square&logo=huggingface&logoColor=black" alt="HuggingFace Repo"/>
+  </a>
+</p>
+
+
 **Code Specialist 7B** es un modelo de lenguaje afinado sobre **Mistral-7B-Instruct-v0.3** con un enfoque en generación y explicación de código en **Python** y **SQL**, orientado a tareas de ciencia de datos y análisis.  
 
 El proyecto incluye además una aplicación de chat local construida en **Streamlit** para interactuar con el modelo y el desarrollo del modelo se puede ver en este [Notebook](https://github.com/Ricardouchub/code-specialist-7b/blob/master/code-specialist-7b%20Notebook.ipynb)

@@ -2,7 +2,7 @@
 
 **Code Specialist 7B** es un modelo de lenguaje afinado sobre **Mistral-7B-Instruct-v0.3** con un enfoque en generación y explicación de código en **Python** y **SQL**, orientado a tareas de ciencia de datos y análisis.  
 
-El proyecto incluye además una aplicación de chat local construida en **Streamlit** para interactuar con el modelo de manera sencilla.  
+El proyecto incluye además una aplicación de chat local construida en **Streamlit** para interactuar con el modelo.
 
 ---
 

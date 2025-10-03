@@ -51,6 +51,10 @@ El modelo está disponible en [**Hugging Face Hub: Code-Specialist-7b**](https:/
 ```python
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
+from huggingface_hub import login
+
+# HF Login Token
+login(token="HF_TOKEN_AQUI")
 
 # Repositorio en Hugging Face
 model_id = "Ricardouchub/code-specialist-7b"

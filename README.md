@@ -44,7 +44,30 @@ Los ejemplos fueron filtrados y curados para priorizar instrucciones de programa
 
 ---
 
-## Uso del Modelo
+## Proceso de Desarrollo
+
+### 1. Objetivo y Entorno
+El objetivo fue crear un modelo especializado en generación de código capaz de ejecutarse en hardware de consumo (GPU de 12 GB VRAM).  
+Se configuró un entorno estable en Windows con **PyTorch**, **Transformers**, **TRL**, **PEFT** y **BitsAndBytes**, resolviendo incompatibilidades entre versiones y CUDA.
+
+### 2. Dataset
+- Se descartaron datasets generales como `databricks-dolly-15k` por exceso de ruido.  
+- Se seleccionaron y filtraron datasets de instrucciones de código, garantizando calidad y relevancia.  
+- El dataset final se formateó al estilo **Alpaca/Mistral** con la plantilla `[INST] ... [/INST] respuesta`.
+
+### 3. Entrenamiento
+- Se aplicó **QLoRA** con el modelo cargado en 4-bit.  
+- Se entrenó usando **SFTTrainer** de la librería `trl`.  
+- Se ajustaron parámetros de entrenamiento para balancear eficiencia y estabilidad en GPU de 12 GB.
+
+### 4. Evaluación
+- No se utilizó `HumanEval` por incompatibilidad en Windows.  
+- Se implementó un **benchmark local** con 25 tareas de programación.  
+- El modelo fue comparado frente al modelo base para evaluar mejoras en formato, precisión y claridad de código.
+
+--- 
+
+## Uso del Modelo desde Hugging Face
 
 El modelo está disponible en [**Hugging Face Hub: Code-Specialist-7b**](https://huggingface.co/Ricardouchub/code-specialist-7b) y puede cargarse directamente para inferencia:
 
@@ -84,33 +107,60 @@ print(tokenizer.decode(outputs[0], skip_special_tokens=True))
 
 ---
 
-## Proceso de Desarrollo
+## Reproduccion del Entorno
 
-### 1. Objetivo y Entorno
-El objetivo fue crear un modelo especializado en generación de código capaz de ejecutarse en hardware de consumo (GPU de 12 GB VRAM).  
-Se configuró un entorno estable en Windows con **PyTorch**, **Transformers**, **TRL**, **PEFT** y **BitsAndBytes**, resolviendo incompatibilidades entre versiones y CUDA.
+### Requisitos de hardware
+- GPU NVIDIA con 12 GB de VRAM o mas para cuantizacion 4-bit (probado con RTX 3080/4080).
+- GPU con 8 GB puede ejecutar el modelo en 8-bit o 16-bit con menor contexto.
+- CPU sin GPU dedicada funciona en 16-bit, pero la generacion sera mas lenta.
 
-### 2. Dataset
-- Se descartaron datasets generales como `databricks-dolly-15k` por exceso de ruido.  
-- Se seleccionaron y filtraron datasets de instrucciones de código, garantizando calidad y relevancia.  
-- El dataset final se formateó al estilo **Alpaca/Mistral** con la plantilla `[INST] ... [/INST] respuesta`.
+### Dependencias previas
+- Python 3.11 (64 bits) y pip actualizados.
+- Git y Git LFS para clonar pesos grandes desde Hugging Face.
+- CUDA 12.1 + cuDNN instalado (solo si se usara GPU en Windows/Linux).
+- (Opcional) Visual Studio Build Tools 2022 para compilar extensiones en Windows.
 
-### 3. Entrenamiento
-- Se aplicó **QLoRA** con el modelo cargado en 4-bit.  
-- Se entrenó usando **SFTTrainer** de la librería `trl`.  
-- Se ajustaron parámetros de entrenamiento para balancear eficiencia y estabilidad en GPU de 12 GB.
+### Preparar el entorno virtual
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install --upgrade pip
+```
 
-### 4. Evaluación
-- No se utilizó `HumanEval` por incompatibilidad en Windows.  
-- Se implementó un **benchmark local** con 25 tareas de programación.  
-- El modelo fue comparado frente al modelo base para evaluar mejoras en formato, precisión y claridad de código.
+Instala PyTorch segun hardware:
+- GPU CUDA 12.1 (Windows/Linux):
+  ```powershell
+  pip install torch==2.1.2+cu121 torchvision==0.16.2+cu121 torchaudio==2.1.2+cu121 --index-url https://download.pytorch.org/whl/cu121
+  ```
+- Solo CPU:
+  ```powershell
+  pip install torch==2.1.2
+  ```
 
----
+Luego instala el resto de dependencias:
+```powershell
+pip install -r requirements.txt
+```
 
-## Próximos pasos
-- Publicar benchmarks completos frente a modelos base y otros especializados.  
-- Integración en **Hugging Face Spaces** para un chat interactivo.  
-- Extender el fine-tuning a más lenguajes de programación y tareas de análisis de datos.
+`requirements.txt` incluye `transformers`, `accelerate`, `streamlit`, `peft`, `trl`, `sentencepiece`, `safetensors` y carga condicional de `bitsandbytes` (se omitira en Windows). Si algun paquete falla en Windows, omite QLoRA (4-bit) y usa 8-bit/16-bit.
+
+### Obtener los pesos del modelo
+1. Descarga desde Hugging Face: `git lfs install` y `git clone https://huggingface.co/Ricardouchub/code-specialist-7b Code-Specialist-7b`.
+2. Para usar solo los adaptadores LoRA: `git clone https://huggingface.co/Ricardouchub/code-specialist-7b-lora lora-adapters` y combina con el modelo base `mistralai/Mistral-7B-Instruct-v0.3`.
+
+Asegurate de que el directorio del modelo este accesible en `./Code-Specialist-7b` (valor predefinido en la app) o indica la ruta remota en la barra lateral.
+
+### Lanzar la aplicacion Streamlit
+```powershell
+streamlit run app.py
+```
+
+- Configura la ruta del modelo en la barra lateral si difiere del valor por defecto.
+- Elige el modo de cuantizacion (4-bit/8-bit/16-bit) segun la VRAM disponible.
+- Personaliza el `system prompt`, presets o parametros de generacion antes de enviar mensajes.
+
+Para ejecutar el servidor en un puerto especifico: `streamlit run app.py --server.port 8501`. En despliegues remotos puedes fijar la variable de entorno `STREAMLIT_SERVER_ADDRESS`.
+
 
 ---
 

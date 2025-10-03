@@ -114,21 +114,8 @@ print(tokenizer.decode(outputs[0], skip_special_tokens=True))
 - GPU con 8 GB puede ejecutar el modelo en 8-bit o 16-bit con menor contexto.
 - CPU sin GPU dedicada funciona en 16-bit, pero la generacion sera mas lenta.
 
-### Dependencias previas
-- Python 3.11 (64 bits) y pip actualizados.
-- Git y Git LFS para clonar pesos grandes desde Hugging Face.
-- CUDA 12.1 + cuDNN instalado (solo si se usara GPU en Windows/Linux).
-- (Opcional) Visual Studio Build Tools 2022 para compilar extensiones en Windows.
-
-### Preparar el entorno virtual
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-pip install --upgrade pip
-```
-
 Instala PyTorch segun hardware:
-- GPU CUDA 12.1 (Windows/Linux):
+- GPU CUDA 12.1:
   ```powershell
   pip install torch==2.1.2+cu121 torchvision==0.16.2+cu121 torchaudio==2.1.2+cu121 --index-url https://download.pytorch.org/whl/cu121
   ```
@@ -142,13 +129,11 @@ Luego instala el resto de dependencias:
 pip install -r requirements.txt
 ```
 
-`requirements.txt` incluye `transformers`, `accelerate`, `streamlit`, `peft`, `trl`, `sentencepiece`, `safetensors` y carga condicional de `bitsandbytes` (se omitira en Windows). Si algun paquete falla en Windows, omite QLoRA (4-bit) y usa 8-bit/16-bit.
+Incluye `transformers`, `accelerate`, `streamlit`, `peft`, `trl`, `sentencepiece`, `safetensors` y carga condicional de `bitsandbytes`.
 
 ### Obtener los pesos del modelo
-1. Descarga desde Hugging Face: `git lfs install` y `git clone https://huggingface.co/Ricardouchub/code-specialist-7b Code-Specialist-7b`.
-2. Para usar solo los adaptadores LoRA: `git clone https://huggingface.co/Ricardouchub/code-specialist-7b-lora lora-adapters` y combina con el modelo base `mistralai/Mistral-7B-Instruct-v0.3`.
-
-Asegurate de que el directorio del modelo este accesible en `./Code-Specialist-7b` (valor predefinido en la app) o indica la ruta remota en la barra lateral.
+1. Descarga desde Github: `git clone https://github.com/Ricardouchub/code-specialist-7b.git`.
+2. Para usar solo los adaptadores LoRA: Ubica la carpeta lora-adapters y combina con el modelo base `mistralai/Mistral-7B-Instruct-v0.3`.
 
 ### Lanzar la aplicacion Streamlit
 ```powershell
@@ -158,9 +143,6 @@ streamlit run app.py
 - Configura la ruta del modelo en la barra lateral si difiere del valor por defecto.
 - Elige el modo de cuantizacion (4-bit/8-bit/16-bit) segun la VRAM disponible.
 - Personaliza el `system prompt`, presets o parametros de generacion antes de enviar mensajes.
-
-Para ejecutar el servidor en un puerto especifico: `streamlit run app.py --server.port 8501`. En despliegues remotos puedes fijar la variable de entorno `STREAMLIT_SERVER_ADDRESS`.
-
 
 ---
 

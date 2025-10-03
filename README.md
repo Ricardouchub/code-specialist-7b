@@ -34,7 +34,7 @@ El proyecto incluye además una aplicación de chat local construida en **Stream
 ## Modelo
 
 - **Base:** [mistralai/Mistral-7B-Instruct-v0.3](https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.3)  
-- **Técnica:** Supervised Fine-Tuning (SFT) con adaptadores **LoRA/QLoRA**  
+- **Técnica**: SFT con *QLoRA* (Quantized Low-Rank Adaptation).
 - **Tamaño:** 7B parámetros  
 - **Dataset final:** ~79,000 ejemplos filtrados de:  
   - [sahil2801/CodeAlpaca-20k](https://huggingface.co/datasets/sahil2801/CodeAlpaca-20k)  

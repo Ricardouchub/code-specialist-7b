@@ -21,9 +21,7 @@ Los ejemplos fueron filtrados y curados para priorizar instrucciones de programa
 
 ## Uso del Modelo
 
-El modelo está disponible en Hugging Face Hub y puede cargarse directamente para inferencia:
-
-[**Hugging Face: Code-Specialist-7b**](https://huggingface.co/Ricardouchub/code-specialist-7b)
+El modelo está disponible en [**Hugging Face Hub: Code-Specialist-7b**](https://huggingface.co/Ricardouchub/code-specialist-7b) y puede cargarse directamente para inferencia:
 
 ```python
 import torch

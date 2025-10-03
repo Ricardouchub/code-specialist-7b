@@ -47,11 +47,10 @@ Los ejemplos fueron filtrados y curados para priorizar instrucciones de programa
 ## Proceso de Desarrollo
 
 ### 1. Objetivo y Entorno
-El objetivo fue crear un modelo especializado en generación de código capaz de ejecutarse en hardware de consumo (GPU de 12 GB VRAM).  
-Se configuró un entorno estable en Windows con **PyTorch**, **Transformers**, **TRL**, **PEFT** y **BitsAndBytes**, resolviendo incompatibilidades entre versiones y CUDA.
+- Crear un modelo especializado en generación de código capaz de ejecutarse en hardware de consumo (GPU de 12 GB VRAM).  
+- Se configuró un entorno con **PyTorch**, **Transformers**, **TRL**, **PEFT** y **BitsAndBytes**, resolviendo incompatibilidades entre versiones y CUDA.
 
 ### 2. Dataset
-- Se descartaron datasets generales como `databricks-dolly-15k` por exceso de ruido.  
 - Se seleccionaron y filtraron datasets de instrucciones de código, garantizando calidad y relevancia.  
 - El dataset final se formateó al estilo **Alpaca/Mistral** con la plantilla `[INST] ... [/INST] respuesta`.
 

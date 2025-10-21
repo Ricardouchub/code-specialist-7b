@@ -115,7 +115,7 @@ print(tokenizer.decode(outputs[0], skip_special_tokens=True))
 ## Reproduccion del Entorno
 
 **Requisitos de hardware**
-- GPU NVIDIA con 12 GB de VRAM o mas para cuantizacion 4-bit (probado con RTX 3080/4080).
+- GPU NVIDIA con 12 GB de VRAM o mas para cuantizacion 4-bit (probado con RTX 3060).
 - GPU con 8 GB puede ejecutar el modelo en 8-bit o 16-bit con menor contexto.
 - CPU sin GPU dedicada funciona en 16-bit, pero la generacion sera mas lenta.
 

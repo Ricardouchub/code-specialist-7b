@@ -1,3 +1,9 @@
+<p align="right">
+  <a href="https://github.com/Ricardouchub/code-specialist-7b/blob/master/README-english.md">
+    README English
+  </a>
+</p>
+
 # Code Specialist 7B
 
 <p align="left">

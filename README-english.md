@@ -110,7 +110,7 @@ print(tokenizer.decode(outputs[0], skip_special_tokens=True))
 ## Environment Reproduction
 
 ### Hardware requirements
-- NVIDIA GPU with 12 GB of VRAM or more for 4-bit quantization (tested on RTX 3080/4080).  
+- NVIDIA GPU with 12 GB of VRAM or more for 4-bit quantization (tested on RTX 3060).  
 - GPUs with 8 GB can run the model in 8-bit or 16-bit with a shorter context window.  
 - A CPU without a dedicated GPU can run the model in 16-bit, with slower generation speed.
 

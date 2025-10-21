@@ -25,7 +25,7 @@
 </p>
 
 
-**Code Specialist 7B** es un modelo de lenguaje afinado sobre **Mistral-7B-Instruct-v0.3** con un enfoque en generación y explicación de código en **Python** y **SQL**, orientado a tareas de ciencia de datos y análisis.  
+**[Code Specialist 7B](https://huggingface.co/Ricardouchub/code-specialist-7b)** es un modelo de lenguaje afinado sobre **Mistral-7B-Instruct-v0.3** con un enfoque en generación y explicación de código en **Python** y **SQL**, orientado a tareas de ciencia de datos y análisis.  
 
 El proyecto incluye además una aplicación de chat local construida en **Streamlit** para interactuar con el modelo y el desarrollo del modelo se puede ver en este [Notebook](https://github.com/Ricardouchub/code-specialist-7b/blob/master/code-specialist-7b%20Notebook.ipynb)
 
@@ -47,11 +47,10 @@ Los ejemplos fueron filtrados y curados para priorizar instrucciones de programa
 ## Proceso de Desarrollo
 
 ### 1. Objetivo y Entorno
-El objetivo fue crear un modelo especializado en generación de código capaz de ejecutarse en hardware de consumo (GPU de 12 GB VRAM).  
-Se configuró un entorno estable en Windows con **PyTorch**, **Transformers**, **TRL**, **PEFT** y **BitsAndBytes**, resolviendo incompatibilidades entre versiones y CUDA.
+- Crear un modelo especializado en generación de código capaz de ejecutarse en hardware de consumo (GPU de 12 GB VRAM).  
+- Se configuró un entorno con **PyTorch**, **Transformers**, **TRL**, **PEFT** y **BitsAndBytes**, resolviendo incompatibilidades entre versiones y CUDA.
 
 ### 2. Dataset
-- Se descartaron datasets generales como `databricks-dolly-15k` por exceso de ruido.  
 - Se seleccionaron y filtraron datasets de instrucciones de código, garantizando calidad y relevancia.  
 - El dataset final se formateó al estilo **Alpaca/Mistral** con la plantilla `[INST] ... [/INST] respuesta`.
 
@@ -109,7 +108,7 @@ print(tokenizer.decode(outputs[0], skip_special_tokens=True))
 
 ## Reproduccion del Entorno
 
-### Requisitos de hardware
+**Requisitos de hardware**
 - GPU NVIDIA con 12 GB de VRAM o mas para cuantizacion 4-bit (probado con RTX 3080/4080).
 - GPU con 8 GB puede ejecutar el modelo en 8-bit o 16-bit con menor contexto.
 - CPU sin GPU dedicada funciona en 16-bit, pero la generacion sera mas lenta.

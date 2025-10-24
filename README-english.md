@@ -42,6 +42,24 @@ The project also includes a local chat application built with **Streamlit** to i
 
 The examples were filtered and curated to prioritize programming instructions in Python and SQL.
 
+## Training
+
+| **Aspect**        | **Detail** |
+|--------------------|-------------|
+| **Method**         | SFT with QLoRA |
+| **Frameworks**     | `transformers`, `trl`, `peft`, `bitsandbytes` |
+| **Hardware**       | GPU 12 GB VRAM (4-bit quantization for training) |
+
+## Main Hyperparameters
+
+| **Parameter** | **Value** |
+|----------------|-----------|
+| `per_device_train_batch_size` | 2 |
+| `gradient_accumulation_steps` | 4 |
+| `learning_rate` | 0.0002 |
+| `num_train_epochs` | 1 |
+| `max_seq_length` | 1024 |
+
 ---
 
 ## Development Process

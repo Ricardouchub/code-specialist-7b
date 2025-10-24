@@ -50,6 +50,27 @@ Los ejemplos fueron filtrados y curados para priorizar instrucciones de programa
 
 ---
 
+## Entrenamiento
+
+| **Aspecto**        | **Detalle** |
+|--------------------|-------------|
+| **Método**         | SFT con QLoRA |
+| **Frameworks**     | `transformers`, `trl`, `peft`, `bitsandbytes` |
+| **Hardware**       | GPU 12 GB VRAM (cuantización en 4-bit para entrenamiento) |
+
+## Hiperparámetros Principales
+
+| **Parámetro** | **Valor** |
+|----------------|-----------|
+| `per_device_train_batch_size` | 2 |
+| `gradient_accumulation_steps` | 4 |
+| `learning_rate` | 0.0002 |
+| `num_train_epochs` | 1 |
+| `max_seq_length` | 1024 |
+
+
+---
+
 ## Proceso de Desarrollo
 
 ### 1. Objetivo y Entorno

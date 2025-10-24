@@ -130,16 +130,11 @@ print(tokenizer.decode(outputs[0], skip_special_tokens=True))
 ### Hardware requirements
 - NVIDIA GPU with 12 GB of VRAM or more for 4-bit quantization (tested on RTX 3060).  
 - GPUs with 8 GB can run the model in 8-bit or 16-bit with a shorter context window.  
-- A CPU without a dedicated GPU can run the model in 16-bit, with slower generation speed.
 
 Install PyTorch according to your hardware:
 - CUDA 12.1 GPU:
   ```powershell
   pip install torch==2.1.2+cu121 torchvision==0.16.2+cu121 torchaudio==2.1.2+cu121 --index-url https://download.pytorch.org/whl/cu121
-  ```
-- CPU only:
-  ```powershell
-  pip install torch==2.1.2
   ```
 
 Then install the remaining dependencies:

@@ -31,7 +31,7 @@
 </p>
 
 
-**[Code Specialist 7B](https://huggingface.co/Ricardouchub/code-specialist-7b)** es un modelo de lenguaje fine-tuned sobre **Mistral-7B-Instruct-v0.3** con enfoque en generación y explicación de código en **Python** y **SQL**, orientado a tareas de analisis y ciencia de datos. 
+**[Code Specialist 7B](https://huggingface.co/Ricardouchub/code-specialist-7b)** es un LLM fine-tuned sobre **Mistral-7B-Instruct-v0.3** con enfoque en generación y explicación de código en **Python** y **SQL**, orientado a tareas de analisis y ciencia de datos. 
 
 El proyecto incluye además una aplicación de chat local en **Streamlit** para interactuar con el modelo y el desarrollo del modelo se puede ver en este [Notebook](https://github.com/Ricardouchub/code-specialist-7b/blob/master/code-specialist-7b%20Notebook.ipynb)
 

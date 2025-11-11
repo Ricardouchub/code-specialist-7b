@@ -160,7 +160,7 @@ uv sync
 
 ### Lanzar la aplicacion Streamlit
 ```powershell
-uv run streamlit run app.py
+uv run streamlit app.py
 ```
 
 - Configura la ruta del modelo en la barra lateral si difiere del valor por defecto.

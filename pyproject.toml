@@ -1,0 +1,27 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "code-specialist-7b"
+version = "0.1.0"
+description = "Fine-tuned Mistral 7B chat app for local code generation."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "Ricardo Urdaneta" }]
+dependencies = [
+  "streamlit>=1.32,<2.0",
+  "transformers>=4.36,<5.0",
+  "accelerate>=0.25,<0.31",
+  "torch>=2.1,<2.3",
+  "safetensors>=0.4.1,<0.5",
+  "sentencepiece>=0.1.99,<0.2",
+  "bitsandbytes>=0.43.1; platform_system != 'Windows'",
+  "peft>=0.7,<0.8",
+  "trl>=0.7.10,<0.8"
+]
+
+[project.urls]
+Homepage = "https://github.com/Ricardouchub/code-specialist-7b"
+Model = "https://huggingface.co/Ricardouchub/code-specialist-7b"

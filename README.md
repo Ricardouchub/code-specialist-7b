@@ -139,18 +139,15 @@ print(tokenizer.decode(outputs[0], skip_special_tokens=True))
 - GPU NVIDIA con 12 GB de VRAM o mas para cuantizacion 4-bit (probado con RTX 3060).
 - GPU con 8 GB puede ejecutar el modelo en 8-bit o 16-bit con menor contexto.
 
-Instala [uv](https://docs.astral.sh/uv/) si aún no está disponible:
-```powershell
-powershell -ExecutionPolicy Bypass -NoProfile -Command "irm https://astral.sh/uv/install.ps1 | iex"
-```
+Instala [uv](https://docs.astral.sh/uv/)
 
-Instala PyTorch según hardware con `uv pip` (drop-in replacement de `pip`):
+Instala PyTorch según hardware:
 - GPU CUDA 12.1:
   ```powershell
   uv pip install torch==2.1.2+cu121 torchvision==0.16.2+cu121 torchaudio==2.1.2+cu121 --index-url https://download.pytorch.org/whl/cu121
   ```
 
-Luego sincroniza el resto de dependencias descritas en `pyproject.toml`:
+Sincroniza el resto de dependencias descritas en `pyproject.toml`:
 ```powershell
 uv sync
 ```

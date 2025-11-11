@@ -31,9 +31,9 @@
 </p>
 
 
-**[Code Specialist 7B](https://huggingface.co/Ricardouchub/code-specialist-7b)** es un modelo de lenguaje afinado sobre **Mistral-7B-Instruct-v0.3** con un enfoque en generación y explicación de código en **Python** y **SQL**, orientado a tareas de ciencia de datos y análisis.  
+**[Code Specialist 7B](https://huggingface.co/Ricardouchub/code-specialist-7b)** es un modelo de lenguaje fine-tuned sobre **Mistral-7B-Instruct-v0.3** con enfoque en generación y explicación de código en **Python** y **SQL**, orientado a tareas de analisis y ciencia de datos. 
 
-El proyecto incluye además una aplicación de chat local construida en **Streamlit** para interactuar con el modelo y el desarrollo del modelo se puede ver en este [Notebook](https://github.com/Ricardouchub/code-specialist-7b/blob/master/code-specialist-7b%20Notebook.ipynb)
+El proyecto incluye además una aplicación de chat local en **Streamlit** para interactuar con el modelo y el desarrollo del modelo se puede ver en este [Notebook](https://github.com/Ricardouchub/code-specialist-7b/blob/master/code-specialist-7b%20Notebook.ipynb)
 
 ---
 
@@ -47,6 +47,27 @@ El proyecto incluye además una aplicación de chat local construida en **Stream
   - [TokenBender/code_instructions_122k_alpaca_style](https://huggingface.co/datasets/TokenBender/code_instructions_122k_alpaca_style)  
 
 Los ejemplos fueron filtrados y curados para priorizar instrucciones de programación en Python y SQL.
+
+---
+
+## Entrenamiento
+
+| **Aspecto**        | **Detalle** |
+|--------------------|-------------|
+| **Método**         | SFT con QLoRA |
+| **Frameworks**     | `transformers`, `trl`, `peft`, `bitsandbytes` |
+| **Hardware**       | GPU 12 GB VRAM (cuantización en 4-bit para entrenamiento) |
+
+## Hiperparámetros Principales
+
+| **Parámetro** | **Valor** |
+|----------------|-----------|
+| `per_device_train_batch_size` | 2 |
+| `gradient_accumulation_steps` | 4 |
+| `learning_rate` | 0.0002 |
+| `num_train_epochs` | 1 |
+| `max_seq_length` | 1024 |
+
 
 ---
 
@@ -115,21 +136,16 @@ print(tokenizer.decode(outputs[0], skip_special_tokens=True))
 ## Reproduccion del Entorno
 
 **Requisitos de hardware**
-- GPU NVIDIA con 12 GB de VRAM o mas para cuantizacion 4-bit (probado con RTX 3080/4080).
+- GPU NVIDIA con 12 GB de VRAM o mas para cuantizacion 4-bit (probado con RTX 3060).
 - GPU con 8 GB puede ejecutar el modelo en 8-bit o 16-bit con menor contexto.
-- CPU sin GPU dedicada funciona en 16-bit, pero la generacion sera mas lenta.
 
 Instala PyTorch segun hardware:
 - GPU CUDA 12.1:
   ```powershell
   pip install torch==2.1.2+cu121 torchvision==0.16.2+cu121 torchaudio==2.1.2+cu121 --index-url https://download.pytorch.org/whl/cu121
   ```
-- Solo CPU:
-  ```powershell
-  pip install torch==2.1.2
-  ```
-
-Luego instala el resto de dependencias:
+  
+Luego el resto de dependencias:
 ```powershell
 pip install -r requirements.txt
 ```

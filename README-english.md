@@ -25,7 +25,7 @@
 </p>
 
 
-**Code Specialist 7B** is a language model fine-tuned on **Mistral-7B-Instruct-v0.3** with a focus on code generation and explanation in **Python** and **SQL**, aimed at data science and analytics tasks.  
+[**Code Specialist 7B**](https://huggingface.co/Ricardouchub/code-specialist-7b) is a language model fine-tuned on **Mistral-7B-Instruct-v0.3** with a focus on code generation and explanation in **Python** and **SQL**, aimed at data science and analytics tasks.  
 
 The project also includes a local chat application built with **Streamlit** to interact with the model, and the model development process is documented in this [Notebook](https://github.com/Ricardouchub/code-specialist-7b/blob/master/code-specialist-7b%20Notebook.ipynb).
 
@@ -41,6 +41,24 @@ The project also includes a local chat application built with **Streamlit** to i
   - [TokenBender/code_instructions_122k_alpaca_style](https://huggingface.co/datasets/TokenBender/code_instructions_122k_alpaca_style)  
 
 The examples were filtered and curated to prioritize programming instructions in Python and SQL.
+
+## Training
+
+| **Aspect**        | **Detail** |
+|--------------------|-------------|
+| **Method**         | SFT with QLoRA |
+| **Frameworks**     | `transformers`, `trl`, `peft`, `bitsandbytes` |
+| **Hardware**       | GPU 12 GB VRAM (4-bit quantization for training) |
+
+## Main Hyperparameters
+
+| **Parameter** | **Value** |
+|----------------|-----------|
+| `per_device_train_batch_size` | 2 |
+| `gradient_accumulation_steps` | 4 |
+| `learning_rate` | 0.0002 |
+| `num_train_epochs` | 1 |
+| `max_seq_length` | 1024 |
 
 ---
 
@@ -110,18 +128,13 @@ print(tokenizer.decode(outputs[0], skip_special_tokens=True))
 ## Environment Reproduction
 
 ### Hardware requirements
-- NVIDIA GPU with 12 GB of VRAM or more for 4-bit quantization (tested on RTX 3080/4080).  
+- NVIDIA GPU with 12 GB of VRAM or more for 4-bit quantization (tested on RTX 3060).  
 - GPUs with 8 GB can run the model in 8-bit or 16-bit with a shorter context window.  
-- A CPU without a dedicated GPU can run the model in 16-bit, with slower generation speed.
 
 Install PyTorch according to your hardware:
 - CUDA 12.1 GPU:
   ```powershell
   pip install torch==2.1.2+cu121 torchvision==0.16.2+cu121 torchaudio==2.1.2+cu121 --index-url https://download.pytorch.org/whl/cu121
-  ```
-- CPU only:
-  ```powershell
-  pip install torch==2.1.2
   ```
 
 Then install the remaining dependencies:

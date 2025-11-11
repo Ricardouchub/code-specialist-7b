@@ -139,18 +139,23 @@ print(tokenizer.decode(outputs[0], skip_special_tokens=True))
 - GPU NVIDIA con 12 GB de VRAM o mas para cuantizacion 4-bit (probado con RTX 3060).
 - GPU con 8 GB puede ejecutar el modelo en 8-bit o 16-bit con menor contexto.
 
-Instala PyTorch segun hardware:
-- GPU CUDA 12.1:
-  ```powershell
-  pip install torch==2.1.2+cu121 torchvision==0.16.2+cu121 torchaudio==2.1.2+cu121 --index-url https://download.pytorch.org/whl/cu121
-  ```
-  
-Luego el resto de dependencias:
+Instala [uv](https://docs.astral.sh/uv/) si aún no está disponible:
 ```powershell
-pip install -r requirements.txt
+powershell -ExecutionPolicy Bypass -NoProfile -Command "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 
-Incluye `transformers`, `accelerate`, `streamlit`, `peft`, `trl`, `sentencepiece`, `safetensors` y carga condicional de `bitsandbytes`.
+Instala PyTorch según hardware con `uv pip` (drop-in replacement de `pip`):
+- GPU CUDA 12.1:
+  ```powershell
+  uv pip install torch==2.1.2+cu121 torchvision==0.16.2+cu121 torchaudio==2.1.2+cu121 --index-url https://download.pytorch.org/whl/cu121
+  ```
+
+Luego sincroniza el resto de dependencias descritas en `pyproject.toml`:
+```powershell
+uv sync
+```
+
+`uv sync` crea un entorno virtual (por defecto `.venv`) y resuelve `transformers`, `accelerate`, `streamlit`, `peft`, `trl`, `sentencepiece`, `safetensors` y la carga condicional de `bitsandbytes`.
 
 ### Obtener los pesos del modelo
 1. Descarga desde Github: `git clone https://github.com/Ricardouchub/code-specialist-7b.git`.
@@ -158,7 +163,7 @@ Incluye `transformers`, `accelerate`, `streamlit`, `peft`, `trl`, `sentencepiece
 
 ### Lanzar la aplicacion Streamlit
 ```powershell
-streamlit run app.py
+uv run streamlit run app.py
 ```
 
 - Configura la ruta del modelo en la barra lateral si difiere del valor por defecto.

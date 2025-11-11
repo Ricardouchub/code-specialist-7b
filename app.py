@@ -17,7 +17,7 @@ os.environ.setdefault("BITSANDBYTES_NOWELCOME", "1")
 # UI & Branding
 # ======================
 st.set_page_config(page_title="Code Specialist 7B", page_icon="🧠", layout="wide")
-st.title("🧠 Code Specialist 7B")
+st.title("Code Specialist 7B")
 st.caption(
     "Modelo base: **Mistral-7B-Instruct-v0.3** · SFT con subconjuntos de **CodeAlpaca-20k** y **code_instructions_122k (formato Alpaca)** filtrados a Python/SQL · "
     "Entrenado y preparado por **Ricardo Urdaneta**."
